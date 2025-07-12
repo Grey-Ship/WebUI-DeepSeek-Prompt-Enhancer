@@ -14,7 +14,7 @@ This extension integrates Deepseek's AI with AUTOMATIC1111's Stable Diffusion we
 
 1. In the Stable Diffusion WebUI, go to the "Extensions" tab
 2. Select "Install from URL"
-3. Enter this repository's URL: `https://github.com/yourusername/stable-diffusion-webui-deepseek-prompts`
+3. Enter this repository's URL
 4. Click "Install"
 5. Restart the WebUI
 

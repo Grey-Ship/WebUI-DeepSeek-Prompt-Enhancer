@@ -23,6 +23,7 @@ class DeepseekPrompts(scripts.Script):
     
     def ui(self, is_img2img):
         shared.log.info("DeepseekPrompts: Building UI components")
+        
         with gr.Accordion("Deepseek Prompt Generator", open=False):
             with gr.Row():
                 with gr.Column(scale=3):
@@ -53,9 +54,9 @@ class DeepseekPrompts(scripts.Script):
         )
         
         use_btn.click(
-            fn=self.use_prompt,
+            fn=lambda x: x,
             inputs=[output],
-            outputs=[self.prompt_textbox]
+            outputs=[prompt_input]
         )
         
         clear_btn.click(
@@ -106,7 +107,6 @@ class DeepseekPrompts(scripts.Script):
             shared.log.info("DeepseekPrompts: Sending request to Deepseek API")
             response = requests.post(self.api_url, headers=headers, json=payload)
             shared.log.debug(f"DeepseekPrompts: API response status: {response.status_code}")
-            shared.log.debug(f"DeepseekPrompts: API response headers: {response.headers}")
             
             response.raise_for_status()
             
@@ -182,20 +182,6 @@ class DeepseekPrompts(scripts.Script):
         except Exception as e:
             shared.log.error(f"DeepseekPrompts: Error enhancing prompt: {str(e)}", exc_info=True)
             return f"Error enhancing prompt: {str(e)}"
-    
-    def use_prompt(self, generated_prompts):
-        shared.log.info(f"DeepseekPrompts: use_prompt called with: generated_prompts='{generated_prompts[:50]}...'")
-        
-        if not generated_prompts.strip():
-            shared.log.warning("DeepseekPrompts: No generated prompts to use")
-            return ""
-            
-        if "\n" in generated_prompts:
-            prompt = generated_prompts.split("\n")[0].split(". ", 1)[-1]
-            shared.log.info(f"DeepseekPrompts: Selected first prompt: {prompt}")
-            return prompt
-        shared.log.info(f"DeepseekPrompts: Using single prompt: {generated_prompts}")
-        return generated_prompts
     
     def get_api_key(self):
         api_key = opts.data.get("deepseek_api_key", os.getenv("DEEPSEEK_API_KEY", ""))
