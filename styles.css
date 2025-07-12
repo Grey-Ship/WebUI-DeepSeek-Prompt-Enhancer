@@ -1,0 +1,40 @@
+/* Main container styling */
+#tab_deepseek {
+    padding: 1em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.deepseek-logo {
+    max-width: 200px;
+    margin: 0 auto 1em;
+    display: block;
+}
+
+/* Button styling */
+#deepseek_generate_btn, #deepseek_enhance_btn {
+    margin-right: 0.5em;
+}
+
+/* Output area styling */
+#deepseek_output textarea {
+    min-height: 200px;
+    font-family: monospace;
+}
+
+/* Slider styling */
+#deepseek_num_variations .slider-value, #deepseek_creativity .slider-value {
+    min-width: 3em;
+    text-align: center;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    #tab_deepseek .gr-row {
+        flex-direction: column;
+    }
+    
+    #tab_deepseek .gr-column {
+        width: 100% !important;
+    }
+}
